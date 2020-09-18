@@ -4,7 +4,9 @@
 
 UI_PATH=/root/code 	# This should match your index.json key
 
+apt update
 apt install -y httpie
 git clone -q https://github.com/jzheaux/oreilly-spring-security-rest-apis.git
 cd ${UI_PATH} && cp -R /root/oreilly-spring-security-rest-apis/* ./
 clear # To clean up Katacoda terminal noise
+mvn compile
