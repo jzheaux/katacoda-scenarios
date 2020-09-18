@@ -2,7 +2,7 @@ In this first step, you'll start the application and get familiar with the envir
 
 ### Starting the Application
 
-The Spring Boot application is Maven-based, so in the Terminal please start the application with `mvn spring:boot-run`{{copy execute}}.
+The Spring Boot application is Maven-based, so in the Terminal please start the application with `mvn spring-boot:run`{{copy execute}}.
 
 You should see some output that includes a message similar to
 
@@ -51,7 +51,7 @@ You should see a response similar to:
 Now try adding a goal using the `POST /goal` endpoint, like so:
 
 ```bash
-echo -n "Complete this Scenario" | :8080/goal
+echo -n "Complete this Scenario" | http :8080/goal
 ```{{copy execute "T2"}}
 
 And you should see some output showing that your goal was created, like the following:
