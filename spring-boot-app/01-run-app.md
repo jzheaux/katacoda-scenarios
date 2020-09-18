@@ -2,7 +2,7 @@ In this first step, you'll start the application and get familiar with the envir
 
 ### Starting the Application
 
-The Spring Boot application is Maven-based, so in the Terminal please start the application with `mvn spring-boot:run`{{execute "T1"}}.
+The Spring Boot application is Maven-based, so in the Terminal please start the application with `mvn spring-boot:run`{{execute "Terminal 1"}}.
 
 You should see some output that includes a message similar to
 
@@ -21,7 +21,7 @@ Started GoalsApplication in 3.288 seconds (JVM running for 3.713)
 In this module, we'll be using [HTTPie](https://httpie.org) to interface with the API.
 HTTPie is similar to cURL, though with a much nicer UI.
 
-Open a New Terminal and type `http :8080/goals`{{execute "T2"}}
+Open a New Terminal and type `http :8080/goals`{{execute "Terminal 2"}}
 
 You should see a response similar to:
 
@@ -52,7 +52,7 @@ Now try adding a goal using the `POST /goal` endpoint, like so:
 
 ```bash
 echo -n "Complete this Scenario" | http :8080/goal
-```{{execute "T2"}}
+```{{execute "Terminal 2"}}
 
 And you should see some output showing that your goal was created, like the following:
 
