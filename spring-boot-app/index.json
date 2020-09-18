@@ -6,12 +6,12 @@
   "details": {
     "steps": [
       {
-        "title": "Step 1",
-        "text": "step1.md"
+        "title": "Run the REST API",
+        "text": "01-run-app.md"
       }
     ],
     "intro": {
-      "text": "intro.md",
+      "text": "00-intro.md",
       "code": "env-init.sh"
     },
     "finish": {
