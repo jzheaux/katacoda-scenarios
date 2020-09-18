@@ -15,7 +15,7 @@
       "code": "env-init.sh"
     },
     "finish": {
-      "text": "finish.md"
+      "text": "99-outro.md"
     }
   },
   "environment": {
