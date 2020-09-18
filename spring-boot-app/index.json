@@ -1,0 +1,40 @@
+{
+  "title": "An Unsecured Spring Boot REST API",
+  "description": "What does Spring Boot look like without security turned on?",
+  "difficulty": "Beginner",
+  "time": "5 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1",
+        "text": "step1.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "code": "env-init.sh"
+    },
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "DemoApplication.java",
+          "target": ""
+        }
+      ]
+    }
+  },
+  "environment": {
+    "uilayout": "editor-terminal",
+    "showide": true,
+    "uieditorpath": "/root/code",
+    "uisettings": "java",
+    "showdashboard": true,
+    "dashboards": [{"name":"Local Web Browser","port":8080}]
+  },
+  "backend": {
+    "imageid": "openjdk:15"
+  }
+}
