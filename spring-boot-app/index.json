@@ -9,6 +9,11 @@
         "title": "Run the REST API",
         "text": "01-run-app.md",
         "verify": "01-verify.sh"
+      },
+      {
+        "title": "Add Spring Security",
+        "test": "02-add-security.md",
+        "verify": "02-verify.sh"
       }
     ],
     "intro": {
