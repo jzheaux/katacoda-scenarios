@@ -12,7 +12,7 @@
       },
       {
         "title": "Add Spring Security",
-        "test": "02-add-security.md",
+        "text": "02-add-security.md",
         "verify": "02-verify.sh"
       }
     ],
