@@ -66,6 +66,15 @@ export PASSWORD=23daabef-a3be-fb90-2a3bcdf56
 
 After that, you can hit the `/goals` endpoint again, this time using the default user and generated password: `http -a user:$PASSWORD :8080/goals`{{execute "T2"}}
 
+### Run a Test
+
+Each step in the scenario is equipped with a JUnit Test to confirm that everything works.
+This first one simply makes sure that Spring Security was set up correctly.
+
+Run it with the Maven command `mvn -Dtest=io.jzheaux.springsecurity.goals.Module1_Tests#task_1 test`{{execute "T2"}}.
+
+At the end of the test run, you should the message `BUILD SUCCESS`.
+
 ### What's Next?
 
 In all likelihood, you don't want to deploy your REST API using a generated password!
