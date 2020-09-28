@@ -21,7 +21,7 @@ To simplify some of the other steps later on in the scenario, Spring Security is
 This means that it's already defined in the Maven POM associated with this project.
 
 To simulate the difference, though, the project has security deliberately shut off.
-So, in src/main/java/io/jzheaux/springsecurity/goals/GoalsApplication.java{{open}}, find the line that says:
+So, in `src/main/java/io/jzheaux/springsecurity/goals/GoalsApplication.java`{{open}}, find the line that says:
 
 ```java
 @SpringBootApplication(exclude=SecurityAutoConfiguration.class)
