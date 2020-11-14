@@ -69,7 +69,7 @@ Third, make the `POST` that includes those values to add a goal:
 
 ```bash
 echo -n "A New Day, A New Goal" | http -a user:password :8080/goal "Cookie: JSESSIONID=$SESSION; X-CSRF-TOKEN: $CSRF"
-```{{execute "Terminal 2"}}
+```{{execute T2}}
 
 ### Why Do I Need a Session ID and CSRF Token?
 
