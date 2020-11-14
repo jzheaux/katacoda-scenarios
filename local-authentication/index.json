@@ -1,6 +1,6 @@
 {
-  "title": "An Unsecured Spring Boot REST API",
-  "description": "What does Spring Boot look like without security turned on?",
+  "title": "Local Authentication with Spring Security",
+  "description": "Configuring local authentication",
   "difficulty": "Beginner",
   "time": "5 minutes",
   "details": {
