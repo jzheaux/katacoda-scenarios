@@ -35,16 +35,16 @@ and change it to read:
 
 This will switch security back to normal.
 
-Having done that, you can (re)start the application by doing `mvn spring-boot:run`{{execute "T1"}}.
+Having done that, you can (re)start the application by doing `mvn spring-boot:run`{{execute T1}}.
 
 ### What Difference Did That Make?
 
 You might be surprised to find out that only by activating the Spring Boot Security starter, you've got a REST API that's secured with HTTP Basic!
 
-Try this out by going into Terminal 2 and running the goals command `http :8080/goals`{{execute "T2"}}.
+Try this out by going into Terminal 2 and running the goals command `http :8080/goals`{{execute T2}}.
 You'll notice that now it gives you a `401` error instead of the list of goals.
 
-In fact, also try `http :8080/k12n3l1k23`{{execute "T2"}}.
+In fact, also try `http :8080/k12n3l1k23`{{execute T2}}.
 Notice that even a made-up URL is secured by Spring Security.
 This gives you the confidence that even if you bring in third-party libraries, those endpoints are secured as well.
 
@@ -64,14 +64,14 @@ It should look something like this:
 export PASSWORD=23daabef-a3be-fb90-2a3bcdf56
 ```
 
-After that, you can hit the `/goals` endpoint again, this time using the default user and generated password: `http -a user:$PASSWORD :8080/goals`{{execute "T2"}}
+After that, you can hit the `/goals` endpoint again, this time using the default user and generated password: `http -a user:$PASSWORD :8080/goals`{{execute T2}}
 
 ### Run a Test
 
 Each step in the scenario is equipped with a JUnit Test to confirm that everything works.
 This first one simply makes sure that Spring Security was set up correctly.
 
-Run it with the Maven command `mvn -Dtest=io.jzheaux.springsecurity.goals.Module1_Tests#task_1 test`{{execute "T2"}}.
+Run it with the Maven command `mvn -Dtest=io.jzheaux.springsecurity.goals.Module1_Tests#task_1 test`{{execute T2}}.
 
 At the end of the test run, you should the message `BUILD SUCCESS`.
 

@@ -34,7 +34,7 @@ TIP: We'll not use Spring Security's `User` class after this step, but do use th
 
 NOTE: `{bcrypt}` is a special prefix that Spring Security understands. When Spring Security needs to compare the password, Spring Security looks at this prefix to know that it should use BCrypt to hash and compare the user's password to the one provided in the request. If it said `{argon}`, then Spring Security would has the given password with Argon instead.
 
-Having done this, restart the application with `mvn spring-boot:run`{{execute "T1"}}.
+Having done this, restart the application with `mvn spring-boot:run`{{execute T1}}.
 
 ### What Difference Did That Make?
 
@@ -42,12 +42,12 @@ What this did is override the default `UserDetailsService` component.
 
 In many circumstances, publishing a component of a given type will override the default behavior.
 
-Try this out by going into Terminal 2 and running the goals command `http -a user:password :8080/goals`{{execute "T2"}}.
+Try this out by going into Terminal 2 and running the goals command `http -a user:password :8080/goals`{{execute T2}}.
 You should now see the list of goals, the same as before.
 
 ### Run a Test
 
-Now check your work with Maven: `mvn -Dtest=io.jzheaux.springsecurity.goals.Module1_Tests#task_2 test`{{execute "T2"}}.
+Now check your work with Maven: `mvn -Dtest=io.jzheaux.springsecurity.goals.Module1_Tests#task_2 test`{{execute T2}}.
 
 At the end of the test run, you should the message `BUILD SUCCESS`.
 

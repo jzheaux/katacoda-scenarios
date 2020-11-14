@@ -110,7 +110,7 @@ For `@PostAuthorize`, you can change it to `@PostAuthorize("@post.authorize(#roo
 
 ### Testing It Out
 
-Now, restart the application with `mvn spring-boot:run`{{execute "T1"}}.
+Now, restart the application with `mvn spring-boot:run`{{execute T1}}.
 
 Read the goals as `admin` to see that you can see all goals using `http -a admin:password :8080/goals`.
 
@@ -121,7 +121,7 @@ You should see a successful response.
 Each step in the scenario is equipped with a JUnit Test to confirm that everything works.
 This one checks your custom authorizer.
 
-Run it with the Maven command `mvn -Dtest=io.jzheaux.springsecurity.goals.Module2_Tests#task_4 test`{{execute "T2"}}.
+Run it with the Maven command `mvn -Dtest=io.jzheaux.springsecurity.goals.Module2_Tests#task_4 test`{{execute T2}}.
 
 At the end of the test run, you should the message `BUILD SUCCESS`.
 

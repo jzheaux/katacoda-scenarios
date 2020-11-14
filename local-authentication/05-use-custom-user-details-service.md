@@ -170,7 +170,7 @@ UserDetailsService userDetailsService(UserRepository users) {
 }
 ```
 
-Having done this, restart the application with `mvn spring-boot:run`{{execute "T1"}}.
+Having done this, restart the application with `mvn spring-boot:run`{{execute T1}}.
 
 ### What Difference Did That Make?
 
@@ -181,12 +181,12 @@ While definitely more coding than the previous two examples, you achieved two ve
 
 Because we did it this way, we'll shortly start seeing benefits that we now get for free.
 
-To make sure it all works, try this out by going into Terminal 2 and running the goals command `http -a hasread:password :8080/goals`{{execute "T2"}}.
+To make sure it all works, try this out by going into Terminal 2 and running the goals command `http -a hasread:password :8080/goals`{{execute T2}}.
 You should see the list of goals, the same as before.
 
 ### Run a Test
 
-Now check your work with Maven: `mvn -Dtest=io.jzheaux.springsecurity.goals.Module1_Tests#task_4 test`{{execute "T2"}}.
+Now check your work with Maven: `mvn -Dtest=io.jzheaux.springsecurity.goals.Module1_Tests#task_4 test`{{execute T2}}.
 
 At the end of the test run, you should the message `BUILD SUCCESS`.
 

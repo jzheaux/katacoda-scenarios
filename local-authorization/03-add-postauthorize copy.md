@@ -41,20 +41,20 @@ After that, it's a matter of seeing if the `owner` field is equal to the user's 
 
 ### Testing It Out
 
-Now, restart the application with `mvn spring-boot:run`{{execute "T1"}}.
+Now, restart the application with `mvn spring-boot:run`{{execute T1}}.
 
 Read the goals and save off one of the goal IDs.
 You can do this in one line with `jq`:
 
 ```bash
 export ID=`http -a user:password :8080/goals | jq -r .[0].id`
-```{{execute "T2"}}
+```{{execute T2}}
 
 Now, try reading that goal with `user`, and then with `hasread`.
 Since that goal belongs to `user`, `user` should be able to read it, but `hasread` should not.
 
-First with `user`: `http -a user:password :8080/goal/$ID`{{execute "T2"}}
-And second with `hasread`: `http -a hasread:password :8080/goal/$ID`{{execute "T2"}}
+First with `user`: `http -a user:password :8080/goal/$ID`{{execute T2}}
+And second with `hasread`: `http -a hasread:password :8080/goal/$ID`{{execute T2}}
 
 ### Adding It to the Rest
 
@@ -65,7 +65,7 @@ Next, add the same expression to the other methods that return `Optional<Goal>` 
 Each step in the scenario is equipped with a JUnit Test to confirm that everything works.
 This one checks your `@PostAuthorize` annotations.
 
-Run it with the Maven command `mvn -Dtest=io.jzheaux.springsecurity.goals.Module2_Tests#task_2 test`{{execute "T2"}}.
+Run it with the Maven command `mvn -Dtest=io.jzheaux.springsecurity.goals.Module2_Tests#task_2 test`{{execute T2}}.
 
 At the end of the test run, you should the message `BUILD SUCCESS`.
 

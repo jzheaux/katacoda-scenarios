@@ -25,7 +25,7 @@ public Optional<Goal> read(@PathVariable("id") UUID id) {
 }
 ```
 
-Having done that, you can restart the application by doing `mvn spring-boot:run`{{execute "T1"}}.
+Having done that, you can restart the application by doing `mvn spring-boot:run`{{execute T1}}.
 
 ### What Difference Did That Make?
 
@@ -38,9 +38,9 @@ The scenario is equipped with a few different users, which you can see declared 
 
 Try hitting the `GET /goals` endpoint using `hasread` and `haswrite`.
 
-If you try with `hasread` by doing `http -a hasread:password :8080/goals`{{execute "T2"}}, you should see the list of goals.
+If you try with `hasread` by doing `http -a hasread:password :8080/goals`{{execute T2}}, you should see the list of goals.
 
-If you try with `haswrite` by doing `http -a haswrite:password :8080/goals`{{execute "T2"}}, you should see a `403 Forbidden` error.
+If you try with `haswrite` by doing `http -a haswrite:password :8080/goals`{{execute T2}}, you should see a `403 Forbidden` error.
 `403` is different from `401`; `403` means the REST API knows the client but the client doesn't have permission.
 
 ### Adding the Rest
@@ -51,7 +51,7 @@ If it is a `POST` or `PUT`, require the `goal:write` permission.
 When you interact with `POST`, `PUT`, or `DELETE` in Spring Security, you will need to provide a CSRF token.
 This application is configured to send one in the response header.
 
-First, do a `http -a user:password :8080/goals`{{execute "T2"}} and look for the `Set-Cookie: JSESSIONID` and `X-CSRF-TOKEN` headers:
+First, do a `http -a user:password :8080/goals`{{execute T2}} and look for the `Set-Cookie: JSESSIONID` and `X-CSRF-TOKEN` headers:
 
 ```bash
 Set-Cookie: JSESSIONID=23cbdc080abfe769500bbb
@@ -91,7 +91,7 @@ We'll see how using a more modern authentication mechanism removes some of this 
 Each step in the scenario is equipped with a JUnit Test to confirm that everything works.
 This first one checks your `@PreAuthorize` annotations.
 
-Run it with the Maven command `mvn -Dtest=io.jzheaux.springsecurity.goals.Module2_Tests#task_1 test`{{execute "T2"}}.
+Run it with the Maven command `mvn -Dtest=io.jzheaux.springsecurity.goals.Module2_Tests#task_1 test`{{execute T2}}.
 
 At the end of the test run, you should the message `BUILD SUCCESS`.
 

@@ -18,11 +18,11 @@ We can use that to enforce authorization rules since the `UPDATE` statement will
 
 ### Testing It Out
 
-Now, restart the application with `mvn spring-boot:run`{{execute "T1"}}.
+Now, restart the application with `mvn spring-boot:run`{{execute T1}}.
 
 Read the goals in order to get the `JSESSIONID` and `CSRF` values:
 
-First, do a `http -a user:password :8080/goals`{{execute "T2"}} and look for the `Set-Cookie: JSESSIONID` and `X-CSRF-TOKEN` headers:
+First, do a `http -a user:password :8080/goals`{{execute T2}} and look for the `Set-Cookie: JSESSIONID` and `X-CSRF-TOKEN` headers:
 
 ```bash
 Set-Cookie: JSESSIONID=23cbdc080abfe769500bbb
@@ -46,7 +46,7 @@ Third, try and complete the goal using `haswrite` instead of `user`:
 
 ```bash
 http -a haswrite:password PUT :8080/goal/$ID/complete "Cookie: JSESSIONID=$SESSION; X-CSRF-TOKEN: $CSRF"
-```{{execute "T2"}}
+```{{execute T2}}
 
 You should see a `403 Forbidden` since that goal doesn't belong to `haswrite`.
 
@@ -54,7 +54,7 @@ Finally, try and complete the goal using `user`:
 
 ```bash
 http -a user:password PUT :8080/goal/$ID/complete "Cookie: JSESSIONID=$SESSION; X-CSRF-TOKEN: $CSRF"
-```{{execute "T2"}}
+```{{execute T2}}
 
 And you should see a successful response.
 
@@ -63,7 +63,7 @@ And you should see a successful response.
 Each step in the scenario is equipped with a JUnit Test to confirm that everything works.
 This one checks your `@Query` annotations.
 
-Run it with the Maven command `mvn -Dtest=io.jzheaux.springsecurity.goals.Module2_Tests#task_3 test`{{execute "T2"}}.
+Run it with the Maven command `mvn -Dtest=io.jzheaux.springsecurity.goals.Module2_Tests#task_3 test`{{execute T2}}.
 
 At the end of the test run, you should the message `BUILD SUCCESS`.
 
