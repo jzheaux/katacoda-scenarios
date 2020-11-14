@@ -1,0 +1,53 @@
+{
+  "title": "Local Authorization with Spring Security",
+  "description": "Expressing and enforcing authorization rules locally",
+  "difficulty": "Beginner",
+  "time": "30 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Run the REST API",
+        "text": "01-run-app.md",
+        "verify": "01-verify.sh"
+      },
+      {
+        "title": "Using @PreAuthorize",
+        "text": "02-add-preauthorize.md",
+        "verify": "02-verify.sh"
+      },
+      {
+        "title": "Using @PostAuthorize",
+        "text": "03-add-postauthorize.md",
+        "verify": "03-verify.sh"
+      },
+      {
+        "title": "Using @PostFilter vs @Query",
+        "text": "04-add-query.md",
+        "verify": "04-verify.sh"
+      },
+      {
+        "title": "Custom Authorization Rules",
+        "text": "05-add-custom-authorizer.md",
+        "verify": "05-verify.sh"
+      }
+    ],
+    "intro": {
+      "text": "00-intro.md",
+      "code": "env-init.sh"
+    },
+    "finish": {
+      "text": "99-outro.md"
+    }
+  },
+  "environment": {
+    "uilayout": "editor-terminal",
+    "uieditorpath": "/root/code",
+    "uisettings": "java",
+    "showdashboard": true,
+    "dashboards": [{"name": "Spring Security Reference","href": "https://docs.spring.io/spring-security/site/docs/5.4.0/reference/html5/"}],
+    "terminals": [{"name": "Terminal 2", "target": "host01", "path" : "/root/code"}]
+  },
+  "backend": {
+    "imageid": "openjdk:15"
+  }
+}
