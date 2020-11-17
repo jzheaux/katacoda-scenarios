@@ -19,9 +19,15 @@ To get you started, an empty `@Configuration` file called `src/main/java/io/jzhe
 In this file, publish a custom in-memory `UserDetailsService` that creates a hard-coded user with the password of "password":
 
 ```java
+import org.springframework.context.annotation.Bean;
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+
 @Bean
 UserDetailsService userDetailsService() {
-    var user = org.springframework.security.core.userdetails.User
+    UserDetails user = org.springframework.security.core.userdetails.User
             .withUsername("user")
             .password("{bcrypt}$2a$10$1/JJ4w5QOt4ln9ris9ERneYh1tXCuKedk/fjStcJlWGZvTDAha5AG")
             .roles("USER")

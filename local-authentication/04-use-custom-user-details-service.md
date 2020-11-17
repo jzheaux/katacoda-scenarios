@@ -1,4 +1,4 @@
-In this step, you'll change the JDBC-based `UserDetailsService` for a custom one that queries a Spring Data repository.
+In this step, you'll change the in-memory `UserDetailsService` for a custom one that queries a Spring Data repository.
 
 Oftentimes, its more flexible to query Spring Data than it is to use Spring Security's stock `UserDetailsService` instances.
 
@@ -16,6 +16,10 @@ In `UserRepositoryUserDetailsService`, make the following changes:
 Your class should look something like this, though note that it's not quite ready yet:
 
 ```java
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 public class UserRepositoryUserDetailsService implements UserDetailsService {
     private final UserRepository users;
 
@@ -53,6 +57,12 @@ Instead, do the following inside `UserRepositoryUserDetailsService`:
 At this point, your class should look something like this:
 
 ```java
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import org.springframework.security.core.GrantedAuthority;
+
 public class UserRepositoryUserDetailsService implements UserDetailsService {
     private final UserRepository users;
 
@@ -111,6 +121,16 @@ So, now for the final touches:
 Your class should now look something like the following:
 
 ```java
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 public class UserRepositoryUserDetailsService implements UserDetailsService {
     private final UserRepository users;
 
@@ -186,7 +206,7 @@ You should see the list of goals, the same as before.
 
 ### Run a Test
 
-Now check your work with Maven: `mvn -Dtest=io.jzheaux.springsecurity.goals.Module1_Tests#task_4 test`{{execute T2}}.
+Now check your work with Maven: `mvn -Dtest=io.jzheaux.springsecurity.goals.Module1_Tests#task_3 test`{{execute T2}}.
 
 At the end of the test run, you should the message `BUILD SUCCESS`.
 

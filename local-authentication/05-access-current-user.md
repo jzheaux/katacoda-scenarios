@@ -38,7 +38,7 @@ public @interface CurrentUsername {
 
 The meaning of `authentication.name` is "get the current authentication and call its `getName()` method".
 
-Then, change the `make` method to use the annotation, like so:
+Then, in `src/main/java/io/jzheaux/springsecurity/goals/GoalController.java`{{open}}, change the `make` method to use the annotation, like so:
 
 ```java
 @PostMapping("/goal")
@@ -48,27 +48,27 @@ public Goal make(@CurrentUsername String owner, @RequestBody String text) {
 }
 ```
 
-Now, Spring Security will do the work to get the current username and supply it to your method call.
+Now, restart with `mvn spring-boot:run`{{execute T1}}, and Spring Security will do the work to get the current username and supply it to your method call.
 
 ### Testing It Out
 
-This scneario is equipped with multiple users; `user`, `hasread`, `haswrite`, and `admin`.
+As stated earlier, the scneario is equipped with multiple users: `user`, `hasread`, `haswrite`, and `admin`.
 
 Now try creating a goal with one of the other users.
 
 To do this, first run the following helper script to collect the REST API's CSRF token and session ID:
 
 ```bash
-. ./etc/get-csrf.sh
-```{execute T2}
+. ./etc/get-csrf
+```{{execute T2}}
 
 NOTE: The leading period in the command is intentional.
 
 Then, create a goal, like so:
 
 ```bash
-echo "A new day, a new goal" | http -a hasuser:password --session=./session.json :8080/goal X-CSRF-TOKEN:$CSRF
-```{execute T2}
+echo "A new day, a new goal" | http -a hasread:password --session=./session.json :8080/goal X-CSRF-TOKEN:$CSRF
+```{{execute T2}}
 
 Now when you query the set of goals with `http :8080/goals`{execute T2}, you'll see the new goal belongs to `hasuser` instead of `user`.
 
