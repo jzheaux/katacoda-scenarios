@@ -5,12 +5,12 @@ In this first step, you'll start the REST API and the accompanying front-end to 
 To get the complete experience, run the following script in order to update the code to use the appropriate Katacoda hostnames:
 
 ```bash
-./etc/rewrite-hosts.sh [[HOST_SUBDOMAIN]] [[KATACODA_HOST]]
+./etc/rewrite-hosts [[HOST_SUBDOMAIN]] [[KATACODA_HOST]]
 ```{{execute T1}}
 
 ### Starting the REST API
 
-The Spring Boot application is Maven-based, so in the Terminal please start the application with `mvn spring-boot:run`{{execute interrupt T1}}.
+The Spring Boot application is Maven-based, so in the Terminal please start the application with `mvn spring-boot:run`{{execute T1}}.
 
 You should see some output that includes a message similar to
 
