@@ -39,7 +39,7 @@ And then add a goal:
 echo -n "A new day, a new goal" | http --session=./session.json -a user:password :8080/goal X-CSRF-TOKEN:$CSRF
 ```{{execute T2}}
 
-Now, if you try `http --user user:password :8080/goals`, you should see you new goal.
+Now, if you try `http -a user:password :8080/goals`{{execute T2}}, you should see you new goal.
 
 ### Completing This Step
 
