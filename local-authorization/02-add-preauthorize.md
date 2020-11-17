@@ -2,7 +2,22 @@ In this step, you'll use `@PreAuthorize` to say which users can do what with the
 
 For most of the scenario, you'll be using permission-based authorization, meaning your authorization decisions will be based on whether or not the user has the `goal:read` or `goal:write` permission.
 
-In `src/main/java/io/jzheaux/springsecurity/goals/GoalsController.java`{{open}}, add the `@PreAuthorize` annotation to the `GoalController#read` methods.
+Additionally, we'll be using method-based rules, meaning you'll annotation the controller methods with your authorization rules.
+Alternatively, you can specify rules in the Spring Security DSL, which we'll introduce a bit later on.
+
+To enable method-based rules, open `src/main/java/io/jzheaux/springsecurity/Security.java`{{open}} and annotate the class with `@EnableGlobalMethodSecurity(prePostEnabled = true)`:
+
+```java
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+
+@Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class SecurityConfig { ... }
+```
+
+This configures Spring Security to pay attention to `@Pre/PostAuthorize` and `@Pre/PostFilter` annotations.
+
+Then, in `src/main/java/io/jzheaux/springsecurity/goals/GoalsController.java`{{open}}, add the `@PreAuthorize` annotation to the `GoalController#read` methods.
 The method should require that the authentication have the `goal:read` permission.
 
 You can do this by annotating the `read` methods like so:
