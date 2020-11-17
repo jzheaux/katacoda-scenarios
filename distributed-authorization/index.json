@@ -6,28 +6,27 @@
   "details": {
     "steps": [
       {
-        "title": "Run the REST API",
-        "text": "01-run-app.md",
-        "verify": "01-verify.sh"
+        "title": "Run the Application and API",
+        "text": "01-run-app.md"
       },
       {
-        "title": "Add Spring Security",
-        "text": "02-add-security.md",
+        "title": "Replace HTTP Basic with Bearer Token",
+        "text": "02-replace-http-basic.md",
         "verify": "02-verify.sh"
       },
       {
-        "title": "Add UserDetailsService",
-        "text": "03-add-user-details-service.md",
+        "title": "Compute Authorities from a JWT",
+        "text": "03-compute-authorities.md",
         "verify": "03-verify.sh"
       },
       {
-        "title": "Use Spring Data-based UserDetailsService",
-        "text": "04-use-custom-user-details-service.md",
+        "title": "Bridging a JWT to a User",
+        "text": "04-bridging-to-a-user.md",
         "verify": "04-verify.sh"
       },
       {
-        "title": "Access Current User",
-        "text": "05-access-current-user.md",
+        "title": "Using Authority Conditionally",
+        "text": "05-conditional-authority.md",
         "verify": "05-verify.sh"
       }
     ],

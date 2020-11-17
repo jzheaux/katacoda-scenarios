@@ -6,29 +6,18 @@
   "details": {
     "steps": [
       {
-        "title": "Run the REST API",
-        "text": "01-run-app.md",
-        "verify": "01-verify.sh"
+        "title": "Run the Application and API",
+        "text": "01-run-app.md"
       },
       {
-        "title": "Add Spring Security",
-        "text": "02-add-security.md",
+        "title": "Configure CORS",
+        "text": "02-add-cors.md",
         "verify": "02-verify.sh"
       },
       {
-        "title": "Add UserDetailsService",
-        "text": "03-add-user-details-service.md",
+        "title": "Configure CSRF",
+        "text": "03-add-csrf.md",
         "verify": "03-verify.sh"
-      },
-      {
-        "title": "Use Spring Data-based UserDetailsService",
-        "text": "04-use-custom-user-details-service.md",
-        "verify": "04-verify.sh"
-      },
-      {
-        "title": "Access Current User",
-        "text": "05-access-current-user.md",
-        "verify": "05-verify.sh"
       }
     ],
     "intro": {
