@@ -9,4 +9,4 @@ cd ${UI_PATH} && cp -R /root/oreilly-spring-security-rest-apis/* ./
 mvn compile
 apt update
 apt install -y httpie
-env
+clear

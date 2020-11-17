@@ -1,6 +1,6 @@
 {
-  "title": "Local Authentication with Spring Security",
-  "description": "Configuring local authentication",
+  "title": "Browser-based REST API Access with Spring Security",
+  "description": "Configuring a REST API to be called in a browser",
   "difficulty": "Beginner",
   "time": "5 minutes",
   "details": {

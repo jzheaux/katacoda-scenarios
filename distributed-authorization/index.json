@@ -1,6 +1,6 @@
 {
-  "title": "Local Authentication with Spring Security",
-  "description": "Configuring local authentication",
+  "title": "Distributed Authorization with Spring Security",
+  "description": "Configuring a REST API to use OAuth 2.0 bearer tokens",
   "difficulty": "Beginner",
   "time": "5 minutes",
   "details": {
