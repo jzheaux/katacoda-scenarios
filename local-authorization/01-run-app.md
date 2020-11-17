@@ -36,7 +36,7 @@ First, retrieve the CSRF token for your current session, like so:
 And then add a goal:
 
 ```bash
-echo -n "A new day, a new goal" | http --session=./session.json --user user:password :8080/goal
+echo -n "A new day, a new goal" | http --session=./session.json -a user:password :8080/goal X-CSRF-TOKEN:$CSRF
 ```{{execute T2}}
 
 Now, if you try `http --user user:password :8080/goals`, you should see you new goal.
