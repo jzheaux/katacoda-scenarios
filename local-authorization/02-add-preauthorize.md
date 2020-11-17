@@ -40,7 +40,7 @@ public Optional<Goal> read(@PathVariable("id") UUID id) {
 }
 ```
 
-Having done that, you can restart the application by doing `mvn spring-boot:run`{{execute T1}}.
+Having done that, you can restart the application by doing `mvn spring-boot:run`{{execute interrupt T1}}.
 
 ### What Difference Did That Make?
 

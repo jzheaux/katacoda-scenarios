@@ -66,7 +66,7 @@ With the above configuration, AJAX requests are allowed from the front-end's hos
 
 ### Test It Out
 
-Go ahead and restart the REST API by running `mvn spring-boot:run`{{execute T1}}.
+Go ahead and restart the REST API by running `mvn spring-boot:run`{{execute interrupt T1}}.
 
 Then, refresh the page for https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com, again paying attention to the JavaScript console.
 
@@ -99,7 +99,7 @@ WebMvcConfigurer webMvc() {
 
 ### Test Again
 
-Go ahead and restart the REST API by running `mvn spring-boot:run`{{execute T1}}.
+Go ahead and restart the REST API by running `mvn spring-boot:run`{{execute interrupt T1}}.
 
 Then, refresh the page for https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com, again paying attention to the JavaScript console.
 

@@ -170,7 +170,7 @@ UserDetailsService userDetailsService(UserRepository users) {
 }
 ```
 
-Having done this, restart the application with `mvn spring-boot:run`{{execute T1}}.
+Having done this, restart the application with `mvn spring-boot:run`{{execute interrupt T1}}.
 
 ### What Difference Did That Make?
 

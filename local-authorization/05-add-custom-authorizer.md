@@ -110,7 +110,7 @@ For `@PostAuthorize`, you can change it to `@PostAuthorize("@post.authorize(#roo
 
 ### Testing It Out
 
-Now, restart the application with `mvn spring-boot:run`{{execute T1}}.
+Now, restart the application with `mvn spring-boot:run`{{execute interrupt T1}}.
 
 Read the goals as `admin` to see that you can see all goals using `http -a admin:password :8080/goals`.
 

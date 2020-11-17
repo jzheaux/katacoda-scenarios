@@ -1,52 +1,91 @@
-In this first step, you'll start the REST API and the accompanying front-end to get familiar with the environment.
+In this step, you'll configure the REST API to use OAuth 2.0 Bearer tokens to authenticate.
+The front-end has already been prepared for you and will also use these tokens.
 
-### Preparing the Code
+### Using Bearer Tokens
 
-To get the complete experience, run the following script in order to update the code to use the appropriate Katacoda hostnames:
+OAuth 2.0 Bearer Tokens are another authentication mechanism.
+A REST API may configure as many ways to authenticate as it likes.
+For simplicity, you'll replace the HTTP Basic configuration with the OAuth 2.0 Bearer Token configuration.
 
-```bash
-./etc/rewrite-hosts.sh [[HOST_SUBDOMAIN]] [[KATACODA_HOST]]
-```{{execute T1}}
+In `src/main/java/io/jzheaux/springsecurity/goals/SecurityConfig.java`{{open}}, replace `httpBasic` with `oauth2ResourceServer` like so:
 
-### Starting the REST API
+```java
+@Bean
+SecurityFilterChain filterChain(HttpSecurity http) {
+    http
+        .cors(Customizer.withDefaults())
+        .authorizeRequests((authz) -> authz.anyRequest().authenticated())
+        .oauth2ResourceServer((oauth2) -> oauth2
+            .jwt(Customizer.withDefaults())
+        );
 
-The Spring Boot application is Maven-based, so in the Terminal please start the application with `mvn spring-boot:run`{{execute T1}}.
-
-You should see some output that includes a message similar to
-
-```bash
-Starting GoalsApplication on a6130036c349 with PID 8027 (/root/code/target/classes started by root in /root/code)
+    return http.build();
+}
 ```
 
-And when the application is ready, you'll see a message similar to
+Also, you need to tell the REST API where the authorization server is, which you can do in `src/main/resources/application.yml`{{open}}:
 
-```bash
-Started GoalsApplication in 3.288 seconds (JVM running for 3.713)
+```yaml
+...
+
+spring
+  jpa:
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: https://[[HOST_SUBDOMAIN]]-8082-[[KATACODA_HOST]].environments.katacoda.com/oauth2/jwks
 ```
 
-### Starting the Front-end
+The property you've just added is the location of the authorization server's public keys, which the REST API will use to verify incoming bearer tokens.
 
-The front-end is a Browser-based application.
-For convenience, it's housed in the same codebase as the REST API for this scenario; however, it could be easily deployed separately, as most Javascript applications are.
+Now restart the REST API by doing `mvn spring-boot:run`{{execute T2}}.
+At this point, the REST API will no longer honor Basic credentials, and instead will only honor bearer tokens.
 
-To start the front-end, run `mvn spring-boot:run -Dstart-class=io.jzheaux.springsecurity.spa.SpaApplication`{{execute T2}}.
-This will start a front-end application on port 8081.
+Lastly, since the browser is calling the REST API directly, we need to again think about the CORS handshake.
 
-Once you've started the application, make sure that it's up and running by navigating to https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com.
+Currently, the REST API allows the `X-CSRF-TOKEN` and `Content-Type` headers.
+However, because bearer tokens is not a browser-managed authentication mechanism, CSRF defense is not necessary.
 
-You should be able to login, add, and complete goals.
+We can make a few adjustments, then, to the CORS configuration, and make it look like this:
 
-### Starting the Authorization Server
+```java
+@Bean
+WebMvcConfigurer webMvcConfigurer() {
+    return new WebMvcConfigurer() {
+        @Override
+        public void addCorsMappings(CorsRegistry registry) {
+            registry.addMapping("/**")
+                    .allowedOrigins("https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com")
+                    .allowedMethods("GET", "POST", "PUT")
+                    .allowedHeaders("Authorization", "Content-Type")
+                    .maxAge(0);
+        }
+    };
+}
+```
 
-We are using HTTP Basic, which isn't ideal since your credentials are stored and managed by the browser.
-It's also not great that the credentials are re-verified on every request, lowering performance.
+Notice three of important changes:
 
-In this scenario, we'll change the authentication mechanism to use the Spring Authorization Server and OAuth 2.0 Bearer Tokens.
+* The `X-CSRF-TOKEN` header no longer needs to be allowed nor exposed
+* The `Allow-Credentials` flag can be removed
+* We need to allow the `Authorization` header
 
-Start the Authorization Server by running the command `mvn spring-boot:run -Dstart-class=io.jzheaux.springsecurity.authzserver.AuthzApplication`{{execute T3}}.
-This will start an authorization server on port 8082.
+### Testing It Out
 
-Once you've started the application, make sure that it's up and running by navigating to https://[[HOST_SUBDOMAIN]]-8082-[[KATACODA_HOST]].environments.katacoda.com.
+The front-end is already prepared, so now navigate to https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com/bearer.html and try things out!
+
+### Run a Test
+
+Each step in the scenario is equipped with a JUnit Test to confirm that everything works.
+This first one simply makes sure that Spring Security was set up correctly.
+
+Run it with the Maven command `mvn -Dtest=io.jzheaux.springsecurity.goals.Module4_Tests#task_1 test`{{execute T4}}.
+
+At the end of the test run, you should the message `BUILD SUCCESS`.
 
 ### What's Next?
 

@@ -18,7 +18,7 @@ We can use that to enforce authorization rules since the `UPDATE` statement will
 
 ### Testing It Out
 
-Now, restart the application with `mvn spring-boot:run`{{execute T1}}.
+Now, restart the application with `mvn spring-boot:run`{{execute interrupt T1}}.
 
 Read the goals in order to get the `JSESSIONID` and `CSRF` values:
 

@@ -2,7 +2,7 @@ In this first step, you'll start the REST API and the accompanying front-end to 
 
 ### Starting the REST API
 
-The Spring Boot application is Maven-based, so in the Terminal please start the application with `mvn spring-boot:run`{{execute T1}}.
+The Spring Boot application is Maven-based, so in the Terminal please start the application with `mvn spring-boot:run`{{execute interrupt T1}}.
 
 You should see some output that includes a message similar to
 
@@ -21,12 +21,12 @@ Started GoalsApplication in 3.288 seconds (JVM running for 3.713)
 The front-end is a Browser-based application.
 For convenience, it's housed in the same codebase as the REST API for this scenario; however, it could be easily deployed separately, as most Javascript applications are.
 
-To start the front-end, run `mvn spring-boot:run -Dstart-class=io.jzheaux.springsecurity.spa.SpaApplication`{{execute T2}}.
+To start the front-end, run `mvn spring-boot:run -Dstart-class=io.jzheaux.springsecurity.spa.SpaApplication`{{execute interrupt T2}}.
 This will start a front-end application on port 8081.
 
 It doesn't work yet because we haven't met the security requirements to do that securely.
 
-Once you've started the application, make sure that it's up and running by navigating to https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com/
+Once you've started the application, make sure that it's up and running by navigating to https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com/basic.html
 
 If you open the JavaScript console, you'll see an error that mentions CORS.
 

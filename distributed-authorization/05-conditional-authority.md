@@ -34,7 +34,7 @@ Now, if the user doesn't grant `user:read` to the client, the user's name won't 
 
 ### Testing It Out
 
-Restart the application using `mvn spring-boot:run`{{execute T2}}.
+Restart the application using `mvn spring-boot:run`{{execute interrupt T2}}.
 
 Once it's restarted, try logging in again to the application, but this time don't grant the `user:read` privilege.
 You should see the goal text, but not the name of the user

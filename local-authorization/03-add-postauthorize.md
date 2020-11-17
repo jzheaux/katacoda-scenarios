@@ -41,7 +41,7 @@ After that, it's a matter of seeing if the `owner` field is equal to the user's 
 
 ### Testing It Out
 
-Now, restart the application with `mvn spring-boot:run`{{execute T1}}.
+Now, restart the application with `mvn spring-boot:run`{{execute interrupt T1}}.
 
 Read the goals and save off one of the goal IDs.
 You can do this in one line with `jq`:

@@ -1,53 +1,67 @@
-In this first step, you'll start the REST API and the accompanying front-end to get familiar with the environment.
+In this step, you'll configure how OAuth 2.0 Bearer Token scopes are translated into granted authorities.
+In previous scenarios, the authorities were always `goal:read` and `goal:write`, and it would be nice to keep it that way to make the transition simple.
 
-### Preparing the Code
+### Publishing a JwtAuthenticationConverter
 
-To get the complete experience, run the following script in order to update the code to use the appropriate Katacoda hostnames:
+With Basic authentication, a `UserDetailsService` takes a username and produces (among other things) a collection of authorities of type `GrantedAuthority`.
 
-```bash
-./etc/rewrite-hosts.sh [[HOST_SUBDOMAIN]] [[KATACODA_HOST]]
-```{{execute T1}}
+With Bearer token authentication, a `JwtAuthenticationConverter` takes a `Jwt` and produces (among other things) a collection of authorities of type `GrantedAuthority`.
 
-### Starting the REST API
+By default, `JwtAuthenticationConverter` will take each scope from the `scope` claim and prepend `SCOPE_` onto the front, though this can be configured.
 
-The Spring Boot application is Maven-based, so in the Terminal please start the application with `mvn spring-boot:run`{{execute T1}}.
+In `src/main/java/io/jzheaux/springsecurity/goals/SecurityConfig.java`{{open}}, publish a `JwtAuthenticationConverter` that removes the `SCOPE_` prefix, like so:
 
-You should see some output that includes a message similar to
+```java
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 
-```bash
-Starting GoalsApplication on a6130036c349 with PID 8027 (/root/code/target/classes started by root in /root/code)
+@Bean
+JwtAuthenticationConverter authenticationConverter(JwtGrantedAuthoritiesConverter authoritiesConverter) {
+  JwtAuthenticationConverter authenticationConverter = new JwtAuthenticationConverter(); 
+  authenticationConverter.setJwtGrantedAuthoritiesConverter(authoritiesConverter);
+  return authenticationConverter;
+}
+
+@Bean
+JwtGrantedAuthoritiesConverter authoritiesConverter() {
+  JwtGrantedAuthoritiesConverter authoritiesConverter = new JwtGrantedAuthoritiesConverter();
+  authoritiesConverter.setAuthorityPrefix(""); // no prefix
+  return authoritiesConverter;
+}
 ```
 
-And when the application is ready, you'll see a message similar to
+### What Difference Did That Make?
 
-```bash
-Started GoalsApplication in 3.288 seconds (JVM running for 3.713)
+Remember that in `GoalController`, there are definitions like this:
+
+```java
+@PreAuthority("hasAuthority('goal:read')")
 ```
 
-### Starting the Front-end
+This means that the request will only be granted if the current authentication has an authority called "goal:read".
 
-The front-end is a Browser-based application.
-For convenience, it's housed in the same codebase as the REST API for this scenario; however, it could be easily deployed separately, as most Javascript applications are.
+By default, Spring Security will prepend `SCOPE_` onto each scope it finds in a given bearer token, which would mean creating a granted authority of `SCOPE_goal:read`.
+If we stayed with the defaults, nothing would be authorized since `SCOPE_goal:read` is different from `goal:read`.
 
-To start the front-end, run `mvn spring-boot:run -Dstart-class=io.jzheaux.springsecurity.spa.SpaApplication`{{execute T2}}.
-This will start a front-end application on port 8081.
+Removing the prefix makes things still match.
+We could have done the opposite and changed the method annotations.
 
-Once you've started the application, make sure that it's up and running by navigating to https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com.
+### Testing It Out
 
-You should be able to login, add, and complete goals.
+With this change, the REST API is ready.
 
-### Starting the Authorization Server
+So, restart the REST API by doing `mvn spring-boot:run`{{execute interrupt T2}}, and then navigate to https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com/bearer.html where the app should work as before, except with an authorization server for logging in.
 
-We are using HTTP Basic, which isn't ideal since your credentials are stored and managed by the browser.
-It's also not great that the credentials are re-verified on every request, lowering performance.
+### Run a Test
 
-In this scenario, we'll change the authentication mechanism to use the Spring Authorization Server and OAuth 2.0 Bearer Tokens.
+Each step in the scenario is equipped with a JUnit Test to confirm that everything works.
+This first one simply makes sure that Spring Security was set up correctly.
 
-Start the Authorization Server by running the command `mvn spring-boot:run -Dstart-class=io.jzheaux.springsecurity.authzserver.AuthzApplication`{{execute T3}}.
-This will start an authorization server on port 8082.
+Run it with the Maven command `mvn -Dtest=io.jzheaux.springsecurity.goals.Module4_Tests#task_2 test`{{execute T4}}.
 
-Once you've started the application, make sure that it's up and running by navigating to https://[[HOST_SUBDOMAIN]]-8082-[[KATACODA_HOST]].environments.katacoda.com.
+At the end of the test run, you should the message `BUILD SUCCESS`.
 
 ### What's Next?
 
-Now, let's change the application to use bearer tokens instead of basic credentials.
+We've looked at a couple of basic features.
+Now, let's get a glipse at a more advanced feature: What should we do if we still need to connect the JWT to a real user in our system?

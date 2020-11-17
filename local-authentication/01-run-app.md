@@ -2,7 +2,7 @@ In this first step, you'll start the application and get familiar with the envir
 
 ### Starting the Application
 
-The Spring Boot application is Maven-based, so in the Terminal please start the application with `mvn spring-boot:run`{{execute "Terminal 1"}}.
+The Spring Boot application is Maven-based, so in the Terminal please start the application with `mvn spring-boot:run`{{execute interrupt T1}}.
 
 You should see some output that includes a message similar to
 

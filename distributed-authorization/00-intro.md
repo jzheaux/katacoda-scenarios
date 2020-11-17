@@ -36,4 +36,3 @@ It also covers some basic patterns that are important to secure software design 
 - Secure By Default
 - Principle of Least Privilege
 - Component-based Configuration
-

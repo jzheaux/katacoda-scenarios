@@ -3,7 +3,7 @@ This scenario is based off of the application you created in the [Local Authenti
 
 ### Starting the Application
 
-The Spring Boot application is Maven-based, so in the Terminal please start the application with `mvn spring-boot:run`{{execute T1}}.
+The Spring Boot application is Maven-based, so in the Terminal please start the application with `mvn spring-boot:run`{{execute interrupt T1}}.
 
 You should see some output that includes a message similar to
 

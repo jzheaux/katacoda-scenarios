@@ -35,7 +35,7 @@ and change it to read:
 
 This will switch security back to normal.
 
-Having done that, you can (re)start the application by doing `mvn spring-boot:run`{{execute T1}}.
+Having done that, you can (re)start the application by doing `mvn spring-boot:run`{{execute interrupt T1}}.
 
 ### What Difference Did That Make?
 

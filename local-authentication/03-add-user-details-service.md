@@ -34,7 +34,7 @@ TIP: We'll not use Spring Security's `User` class after this step, but do use th
 
 NOTE: `{bcrypt}` is a special prefix that Spring Security understands. When Spring Security needs to compare the password, Spring Security looks at this prefix to know that it should use BCrypt to hash and compare the user's password to the one provided in the request. If it said `{argon}`, then Spring Security would has the given password with Argon instead.
 
-Having done this, restart the application with `mvn spring-boot:run`{{execute T1}}.
+Having done this, restart the application with `mvn spring-boot:run`{{execute interrupt T1}}.
 
 ### What Difference Did That Make?
 
