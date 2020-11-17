@@ -9,4 +9,4 @@ cd ${UI_PATH} && cp -R /root/oreilly-spring-security-rest-apis/* ./
 mvn compile
 apt update
 apt install -y httpie
-clear # To clean up Katacoda terminal noise
+env
