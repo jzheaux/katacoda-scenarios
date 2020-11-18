@@ -1,0 +1,24 @@
+{
+    "title": "Spring Security for REST APIs",
+    "description": "Learn how to use Spring Security to secure REST APIs",
+    "icon": "fa-katacoda",
+    "courses": [
+      {
+        "course_id": "local-authentication",
+        "title": "Local Authentication with Spring Security",
+      },
+      {
+        "course_id": "local-authorization",
+        "title": "Local Authorization with Spring Security"
+      },
+      {
+        "course_id": "browser-based-access",
+        "title": "Browsers with Spring Security"
+      },
+      {
+        "course_id": "distributed-authorization",
+        "title": "Distributed Authorization with Spring Security"
+      }
+    ]
+}
+  
