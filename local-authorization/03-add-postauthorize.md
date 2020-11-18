@@ -7,9 +7,9 @@ The `GET /goal/{id}` endpoint has a security problem in that anyone in possessio
 This isn't good since that means if `hasread` can find out the ID of one of `haswrite`'s goals, then `hasread` can view the details.
 
 Since ownership is typically custom for each application, Spring Security doesn't check for this automatically.
-Insted, you can enforce this ownership by adding a `@PostAuthorize` annotation with a SpEL expression that evaluates the returned object.
+Instead, you can enforce this ownership by adding a `@PostAuthorize` annotation with a SpEL expression that evaluates the returned object.
 
-Add the `@PostAuthorize` annotation to the `GoalController#read(String)` method like so:
+In `src/main/java/io/jzheaux/springsecurity/goals/GoalController.java`{{open}}, add the `@PostAuthorize` annotation to the `GoalController#read(String)` method like so:
 
 ```java
 import org.springframework.security.access.prepost.PostAuthorize;
@@ -59,6 +59,29 @@ And second with `hasread`: `http -a hasread:password :8080/goal/$ID`{{execute T2
 ### Adding It to the Rest
 
 Next, add the same expression to the other methods that return `Optional<Goal>` which are `revise`, `complete`, and `share`.
+
+### Using @PostFilter
+
+While we're here, let's use one more annotation, `@PostFilter`.
+This annotation is handy when you are returning a collection, array, map, or stream of values and need Spring Security to filter them based on some authentication expression.
+
+So, as a final step, add the following annotation to the `read()` method:
+
+```java
+import org.springframework.security.access.prepost.PostFilter;
+
+@GetMapping("/goals")
+@PreAuthorize("hasAuthority('goal:read')")
+@PostFilter("filterObject.owner == authentication.name") // add this line
+public Iterable<Goal> read() {
+    // ...
+}
+```
+The expression `filterObject.owner == authentication.name` means Spring Security should remove any values whose `owner` isn't the same and the current username.
+
+And then restart the application with `mvn spring-boot:run`{{execute interrupt T1}}.
+
+Now, when you query `http -a hasread:password :8080/goals`{{execute T2}}, you'll only see the goals that belong to `hasread` instead of all goals.
 
 ### Run a Test
 

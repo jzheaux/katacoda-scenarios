@@ -20,32 +20,18 @@ We can use that to enforce authorization rules since the `UPDATE` statement will
 
 Now, restart the application with `mvn spring-boot:run`{{execute interrupt T1}}.
 
-Read the goals in order to get the `JSESSIONID` and `CSRF` values:
-
-First, do a `http -a user:password :8080/goals`{{execute T2}} and look for the `Set-Cookie: JSESSIONID` and `X-CSRF-TOKEN` headers:
+After doing that, retrieve one of `user`'s goal IDs by doing:
 
 ```bash
-Set-Cookie: JSESSIONID=23cbdc080abfe769500bbb
-X-CSRF-TOKEN: 8454457f-91b6-4aea-8b67-ce186c00c6a0
-```
+export ID=`http -a user:password :8080/goals | jq -r .[0].id`
+```{{execute T2}}
 
-Second, export those values into your bash environment, like so:
+Next, retreive the CSRF token by doing `. ./etc/get-csrf`{{execute T2}}.
 
-```bash
-export SESSION=23cbdc080abfe769500bbb
-export CSRF=8454457f-91b6-4aea-8b67-ce186c00c6a0
-```
-
-Also, copy one of `user`'s goal IDs from the response and export that value, too:
+Then, try and complete `user`'s goal using `haswrite`:
 
 ```bash
-export ID=3854457f-78b6-5bea-8b67-67186c00c6b9
-```
-
-Third, try and complete the goal using `haswrite` instead of `user`:
-
-```bash
-http -a haswrite:password PUT :8080/goal/$ID/complete "Cookie: JSESSIONID=$SESSION; X-CSRF-TOKEN: $CSRF"
+http -a haswrite:password --session=./session.json PUT :8080/goal/$ID/complete X-CSRF-TOKEN:$CSRF
 ```{{execute T2}}
 
 You should see a `403 Forbidden` since that goal doesn't belong to `haswrite`.
@@ -53,7 +39,7 @@ You should see a `403 Forbidden` since that goal doesn't belong to `haswrite`.
 Finally, try and complete the goal using `user`:
 
 ```bash
-http -a user:password PUT :8080/goal/$ID/complete "Cookie: JSESSIONID=$SESSION; X-CSRF-TOKEN: $CSRF"
+http -a user:password --session=./session.json PUT :8080/goal/$ID/complete X-CSRF-TOKEN:$CSRF
 ```{{execute T2}}
 
 And you should see a successful response.

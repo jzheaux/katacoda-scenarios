@@ -5,7 +5,7 @@ For most of the scenario, you'll be using permission-based authorization, meanin
 Additionally, we'll be using method-based rules, meaning you'll annotation the controller methods with your authorization rules.
 Alternatively, you can specify rules in the Spring Security DSL, which we'll introduce a bit later on.
 
-To enable method-based rules, open `src/main/java/io/jzheaux/springsecurity/Security.java`{{open}} and annotate the class with `@EnableGlobalMethodSecurity(prePostEnabled = true)`:
+To enable method-based rules, open `src/main/java/io/jzheaux/springsecurity/SecurityConfig.java`{{open}} and annotate the class with `@EnableGlobalMethodSecurity(prePostEnabled = true)`:
 
 ```java
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -17,7 +17,7 @@ public class SecurityConfig { ... }
 
 This configures Spring Security to pay attention to `@Pre/PostAuthorize` and `@Pre/PostFilter` annotations.
 
-Then, in `src/main/java/io/jzheaux/springsecurity/goals/GoalsController.java`{{open}}, add the `@PreAuthorize` annotation to the `GoalController#read` methods.
+Then, in `src/main/java/io/jzheaux/springsecurity/goals/GoalController.java`{{open}}, add the `@PreAuthorize` annotation to the `GoalController#read` methods.
 The method should require that the authentication have the `goal:read` permission.
 
 You can do this by annotating the `read` methods like so:
@@ -27,13 +27,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 // ...
 
-@PreAuthorize("hasAuthority('has:read')")
+@PreAuthorize("hasAuthority('goal:read')")
 @GetMapping("/goals")
 public Iterable<Goal> read() {
     // ...
 }
 
-@PreAuthorize("hasAuthority('has:read')")
+@PreAuthorize("hasAuthority('goal:read')")
 @GetMapping("/goal/{id}")
 public Optional<Goal> read(@PathVariable("id") UUID id) {
     // ...
@@ -66,24 +66,13 @@ If it is a `POST` or `PUT`, require the `goal:write` permission.
 When you interact with `POST`, `PUT`, or `DELETE` in Spring Security, you will need to provide a CSRF token.
 This application is configured to send one in the response header.
 
-First, do a `http -a user:password :8080/goals`{{execute T2}} and look for the `Set-Cookie: JSESSIONID` and `X-CSRF-TOKEN` headers:
+First, do use the helper script `. ./etc/get-csrf`{{execute T2}}.
+This uses `http` to write session details to the file system and the CSRF token to the environment.
+
+Then, make the `POST` that includes those values to add a goal:
 
 ```bash
-Set-Cookie: JSESSIONID=23cbdc080abfe769500bbb
-X-CSRF-TOKEN: 8454457f-91b6-4aea-8b67-ce186c00c6a0
-```
-
-Second, export those values into your bash environment, like so:
-
-```bash
-export SESSION=23cbdc080abfe769500bbb
-export CSRF=8454457f-91b6-4aea-8b67-ce186c00c6a0
-```
-
-Third, make the `POST` that includes those values to add a goal:
-
-```bash
-echo -n "A New Day, A New Goal" | http -a user:password :8080/goal "Cookie: JSESSIONID=$SESSION; X-CSRF-TOKEN: $CSRF"
+echo -n "A New Day, A New Goal" | http -a user:password --session=./session.json :8080/goal X-CSRF-TOKEN:$CSRF
 ```{{execute T2}}
 
 ### Why Do I Need a Session ID and CSRF Token?
