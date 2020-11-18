@@ -1,8 +1,8 @@
 {
   "title": "Local Authentication with Spring Security",
   "description": "Configuring local authentication",
-  "difficulty": "Beginner",
-  "time": "5 minutes",
+  "difficulty": "Intermediate",
+  "time": "20 minutes",
   "details": {
     "steps": [
       {

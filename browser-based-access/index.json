@@ -1,8 +1,8 @@
 {
   "title": "Browser-based REST API Access with Spring Security",
   "description": "Configuring a REST API to be called in a browser",
-  "difficulty": "Beginner",
-  "time": "5 minutes",
+  "difficulty": "Intermediate",
+  "time": "20 minutes",
   "details": {
     "steps": [
       {

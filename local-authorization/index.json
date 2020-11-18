@@ -1,8 +1,8 @@
 {
   "title": "Local Authorization with Spring Security",
   "description": "Expressing and enforcing authorization rules locally",
-  "difficulty": "Beginner",
-  "time": "30 minutes",
+  "difficulty": "Intermediate",
+  "time": "20 minutes",
   "details": {
     "steps": [
       {
