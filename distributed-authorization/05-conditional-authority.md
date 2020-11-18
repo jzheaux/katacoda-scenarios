@@ -7,24 +7,24 @@ The less authorization logic that goes inside of a controller, the better.
 
 There are times when including authorization logic in our business logic will be necessary, though.
 
-In `src/main/java/io/jzheaux/springsecurity/goals/GoalController.java`{{open}}, make a change to the `read()` method that only adds the full name if the user granted that privilege to the client, like so:
+In `src/main/java/io/jzheaux/springsecurity/goals/GoalController.java`{{open}}, make a change to the `addName(Goal)` method that only adds the full name if the user granted that privilege to the client, like so:
 
 ```java
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.util.Collection;
+
 // ...
 
-@GetMapping("/goals")
-// ...
-public Iterable<Goal> read() {
+private Goal addName(String) {
   Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
   Collection<String> scopes = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
   if (scopes.contains("user:read")) {
-    for (Goal goal : goals) {
-      addName(goal);
-    }
+    String name = this.users.findByUsername(goal.getOwner())
+				.map(User::getFullName).orElse("none");
+		goal.setText(goal.getText() + ", by " + name);
   }
 	return goals;
 }
@@ -34,9 +34,9 @@ Now, if the user doesn't grant `user:read` to the client, the user's name won't 
 
 ### Testing It Out
 
-Restart the application using `mvn spring-boot:run`{{execute interrupt T2}}.
+Restart the application using `mvn spring-boot:run`{{execute interrupt T1}}.
 
-Once it's restarted, try logging in again to the application, but this time don't grant the `user:read` privilege.
+Once it's restarted, try logging in again to the application at https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com/bearer.html, but this time don't grant the `user:read` privilege.
 You should see the goal text, but not the name of the user
 
 ### Alternative Solutions

@@ -34,6 +34,8 @@ import java.util.stream.Collectors;
 
 // ... 
 
+// convert authorities from user.getUserAuthorities into instances of SimpleGrantedAuthority
+
 authorities = user.getUserAuthorities().stream()
   .map((userAuthority) -> new SimpleGrantedAuthority(userAuthority.getAuthority()))
   .collect(Collectors.toList());
@@ -42,6 +44,8 @@ authorities = user.getUserAuthorities().stream()
 Then, merge that with what `JwtGrantedAuthoritiesConverter` gives you:
 
 ```java
+// merge these authorities from what the authorities that this.authoritiesConverter.convert returns
+
 authorities.retainAll(this.authoritiesConverter.convert(jwt));
 ```
 
@@ -61,8 +65,10 @@ If the user is a premium user *and* the client was granted `goal:write`, then gr
 You can do this after merging the authorities like so:
 
 ```java
+import org.springframework.security.core.authority.AuthorityUtils;
+
 Collection<String> scopes = AuthorityUtils.authorityListToSet(authorities);
-if (user.isPremium() && scopes.contains("goal:write")) {
+if ("premium".equals(user.getSubscription()) && scopes.contains("goal:write")) {
   authorities.add(new SimpleGrantedAuthority("goal:share"));
 }
 ```
@@ -72,7 +78,16 @@ Now, the complex authorization logic has already been executed and the controlle
 
 ### Updating the Configuration
 
-To publish our changes, in `src/main/java/io/jzheaux/springsecurity/goals/UserRepositoryJwtAuthenticationConverter.java`{{open}}, annotate the class with `@Component` so that it is published to the application context.
+To publish our changes, in `src/main/java/io/jzheaux/springsecurity/goals/UserRepositoryJwtAuthenticationConverter.java`{{open}}, annotate the class with `@Component` so that it is published to the application context:
+
+```java
+import org.springframework.stereotype.Component;
+
+// ...
+
+@Component
+public class UserRepositoryJwtAuthenticationConverter ...
+```
 
 Then, make the following two changes to `src/main/java/io/jzheaux/springsecurity/goals/SecurityConfig.java`{{open}}:
 

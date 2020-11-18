@@ -1,4 +1,4 @@
-In this step, you'll configure how OAuth 2.0 Bearer Token scopes are translated into granted authorities.
+In this step, you'll configure how OAuth 2.0 bearer token scopes are translated into granted authorities.
 In previous scenarios, the authorities were always `goal:read` and `goal:write`, and it would be nice to keep it that way to make the transition simple.
 
 ### Publishing a JwtAuthenticationConverter
@@ -50,7 +50,7 @@ We could have done the opposite and changed the method annotations.
 
 With this change, the REST API is ready.
 
-So, restart the REST API by doing `mvn spring-boot:run`{{execute interrupt T2}}, and then navigate to https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com/bearer.html where the app should work as before, except with an authorization server for logging in.
+So, restart the REST API by doing `mvn spring-boot:run`{{execute interrupt T1}}, and then navigate to https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com/bearer.html where the app should work as before, except with an authorization server for logging in.
 
 ### Run a Test
 

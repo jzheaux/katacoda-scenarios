@@ -78,7 +78,7 @@ At this point, the REST API will no longer honor Basic credentials, and instead 
 
 We're now configured to use an authorization server to log in the user.
 
-The authorization server, which is also part of the repository, though in the majority of cases it is a separate third-party application.
+The authorization server is also part of the repository, though in the majority of cases it is a separate third-party application.
 
 You can start it with the command `mvn spring-boot:run -Dstart-class=io.jzheaux.springsecurity.authzserver.AuthzApplication`{{execute interrupt T3}}.
 

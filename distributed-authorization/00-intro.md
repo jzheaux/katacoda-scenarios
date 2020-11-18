@@ -1,7 +1,7 @@
-In this scenario, you'll be taking a secure REST API and exposing it to browser requests.
+In this scenario, you'll be taking a secure REST API and exposing it to browser requests using OAuth 2.0 bearer tokens.
 The front-end is already built for you, but the scenario will highlight the important pieces so it's clear how to alter the REST API.
 
-This scenario builds off of the [Local Authorization with Spring Security scenario](https://katacode.com/jzheaux/local-authorization).
+This scenario builds off of the [Browsers with Spring Security scenario](https://katacode.com/jzheaux/scenarios/browser-based-access).
 
 ### Pre-requisites
 
@@ -20,16 +20,22 @@ It may then also help to read [The Big Picture section of the Spring Security Re
 ### How Do Browsers Interact with REST APIs?
 
 The most common is for a front-end to talk to REST APIs over AJAX.
-This presents some important security considerations that you'll need to consider when building front-ends.
+In the previous scenario, you negotiated this with HTTP Basic, but it has some drawbacks:
 
+* The user's password is storaged and managed in the browser, lowering security
+* The browser can hand up those credentials via third-parties, lowering security, and
+* The password has to be re-hashed on each request, lowering performance
+
+By the end of this scenario, you'll have addressed these, though they will be replaced with a more minor concern.
 In a future scenario, you'll learn about an alternative setup that's recommended by the Browsed-Based Apps Best Practices RFC.
 
 ### Goals of This Scenario
 
 This scenario teaches you:
 
-- How to configure a Spring REST API for CORS
-- How to configure a Spring REST API for CSRF
+- How to configure a Spring REST API to accept bearer tokens
+- How to configure a Spring REST API for CORS when using bearer tokens
+- How to map an existing backend user to claims in a bearer token
 
 It also covers some basic patterns that are important to secure software design like:
 
