@@ -16,7 +16,7 @@ This time, you'll connect Spring Security's `Jwt` with the REST API's custom `Us
 
 Most of the class in `src/main/java/io/jzheaux/springsecurity/goals/UserRepositoryJwtAuthenticationConverter.java`{{open}} is already completed since it is quite similar to the work you already did in the first scenario with `UserRepositoryUserDetailsService`.
 
-What remains are to assign the authorities.
+What remains are to assign the authorities and to publish it as a bean.
 However, you've got authorities from the `User` and you've got authorities from the `Jwt`.
 How should these be combined?
 
@@ -47,6 +47,7 @@ authorities.retainAll(this.authoritiesConverter.convert(jwt));
 
 The result is that the client will only get the privileges that the user has and that they granted.
 
+
 ### Custom Domain
 
 You'll also notice that now you have a similar adapter class that is both of type `User` and of type `OAuth2AuthenticatedPrincipal`, or the OAuth equivalent of `UserDetails`.
@@ -68,6 +69,33 @@ if (user.isPremium() && scopes.contains("goal:write")) {
 
 What this does is keep the extra logic about "premium" outside of the controller.
 Now, the complex authorization logic has already been executed and the controller can focus on simply matching the authority.
+
+### Updating the Configuration
+
+To publish our changes, in `src/main/java/io/jzheaux/springsecurity/goals/UserRepositoryJwtAuthenticationConverter.java`{{open}}, annotate the class with `@Component` so that it is published to the application context.
+
+Then, make the following two changes to `src/main/java/io/jzheaux/springsecurity/goals/SecurityConfig.java`{{open}}:
+
+* Remove the `authenticationConverter` `@Bean` definition (since `UserRepositoryJwtAuthenticationConverter` replaces it)
+* Wire the authentication converter directly onto the DSL
+
+The result should look like the following:
+
+```java
+// ...
+
+@Bean
+SecurityFilterChain filterChain(HttpSecurity http, UserRepositoryJwtAuthenticationConverter authenticationConverter) throws Exception {
+  http
+    .cors(Customizer.withDefaults())
+    .authorizeRequests((authz) -> authz.anyRequest().authenticated())
+    .oauth2ResourceServer((oauth2) -> oauth2
+      .jwt((jwt) -> jwt.jwtAuthenticationConverter(authenticationConverter))
+    );
+}
+
+// ... remove the authenticationConverter bean
+```
 
 ### Run a Test
 
