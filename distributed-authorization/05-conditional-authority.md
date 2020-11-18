@@ -57,7 +57,7 @@ This first one simply makes sure that Spring Security was set up correctly.
 
 Run it with the Maven command `mvn -Dtest=io.jzheaux.springsecurity.goals.Module4_Tests#task_4 test`{{execute T4}}.
 
-At the end of the test run, you should the message `BUILD SUCCESS`.
+At the end of the test run, you should see the message `BUILD SUCCESS`.
 
 ### What's Next?
 

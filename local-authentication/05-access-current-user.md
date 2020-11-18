@@ -76,7 +76,7 @@ Now when you query the set of goals with `http :8080/goals`{execute T2}, you'll 
 
 Now check your work with Maven: `mvn -Dtest=io.jzheaux.springsecurity.goals.Module1_Tests#task_4 test`{{execute T2}}.
 
-At the end of the test run, you should the message `BUILD SUCCESS`.
+At the end of the test run, you should see the message `BUILD SUCCESS`.
 
 ### What's Next?
 

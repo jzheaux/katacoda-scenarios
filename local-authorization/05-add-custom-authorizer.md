@@ -37,6 +37,7 @@ In `src/main/java/io/jzheaux/springsecurity/goals/GoalAuthorizer.java`{{open}}, 
 import org.springframework.security.access.expression.method.MethodSecurityExpressionOperations;
 import org.springframework.stereotype.Component;
 
+@Component("post")
 public class GoalAuthorizer {
     public Boolean filter(MethodSecurityExpressionOperations operations) {
 
@@ -74,7 +75,7 @@ public Boolean filter(MethodSecurityExpressionOperations operations) {
         return true;
     }
     Authentication authentication = operations.getAuthentication();
-	String owner = ((Goal) operations.getFilterObject().getOwner();
+	String owner = ((Goal) operations.getFilterObject()).getOwner();
 }
 
 public Boolean authorize(MethodSecurityExpressionOperations operations) {
@@ -112,7 +113,7 @@ For `@PostAuthorize`, you can change it to `@PostAuthorize("@post.authorize(#roo
 
 Now, restart the application with `mvn spring-boot:run`{{execute interrupt T1}}.
 
-Read the goals as `admin` to see that you can see all goals using `http -a admin:password :8080/goals`.
+Read the goals as `admin` to see that you can see all goals using `http -a admin:password :8080/goals`{{execute T2}}.
 
 You should see a successful response.
 
@@ -123,7 +124,7 @@ This one checks your custom authorizer.
 
 Run it with the Maven command `mvn -Dtest=io.jzheaux.springsecurity.goals.Module2_Tests#task_4 test`{{execute T2}}.
 
-At the end of the test run, you should the message `BUILD SUCCESS`.
+At the end of the test run, you should see the message `BUILD SUCCESS`.
 
 ### What's Next?
 

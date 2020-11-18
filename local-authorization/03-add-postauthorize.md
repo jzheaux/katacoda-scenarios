@@ -9,7 +9,7 @@ This isn't good since that means if `hasread` can find out the ID of one of `has
 Since ownership is typically custom for each application, Spring Security doesn't check for this automatically.
 Instead, you can enforce this ownership by adding a `@PostAuthorize` annotation with a SpEL expression that evaluates the returned object.
 
-In `src/main/java/io/jzheaux/springsecurity/goals/GoalController.java`{{open}}, add the `@PostAuthorize` annotation to the `GoalController#read(String)` method like so:
+In `src/main/java/io/jzheaux/springsecurity/goals/GoalController.java`{{open}}, add the `@PostAuthorize` annotation to the `GoalController#read(UUID)` method like so:
 
 ```java
 import org.springframework.security.access.prepost.PostAuthorize;
@@ -90,15 +90,12 @@ This one checks your `@PostAuthorize` annotations.
 
 Run it with the Maven command `mvn -Dtest=io.jzheaux.springsecurity.goals.Module2_Tests#task_2 test`{{execute T2}}.
 
-At the end of the test run, you should the message `BUILD SUCCESS`.
+At the end of the test run, you should see the message `BUILD SUCCESS`.
 
 ### What's Next?
 
-Nice work! THis is starting to become a real REST API.
+Nice work! This is starting to become a real REST API.
 
-It's time to fix a bug that has probably been bugging you like it's been bugging me.
-When you call `GET /goals` it returns all the goals and not just the ones that belong to the user!
-
-Also, you might have noticed an issue with the `complete` and `revise` methods: Since they make changes in the database, it's really important to verify ownership _before_ the goals are changed.
+You might have noticed an issue with the `complete` and `revise` methods: Since they make changes in the database, it's really important to verify ownership _before_ the goals are changed.
 
 Let's address those in the next step.

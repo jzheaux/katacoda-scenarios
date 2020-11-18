@@ -208,7 +208,7 @@ You should see the list of goals, the same as before.
 
 Now check your work with Maven: `mvn -Dtest=io.jzheaux.springsecurity.goals.Module1_Tests#task_3 test`{{execute T2}}.
 
-At the end of the test run, you should the message `BUILD SUCCESS`.
+At the end of the test run, you should see the message `BUILD SUCCESS`.
 
 ### What's Next?
 

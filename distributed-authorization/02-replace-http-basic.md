@@ -37,13 +37,10 @@ spring
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: https://[[HOST_SUBDOMAIN]]-8082-[[KATACODA_HOST]].environments.katacoda.com/oauth2/jwks
+          jwk-set-uri: https://[[HOST_SUBDOMAIN]]-8083-[[KATACODA_HOST]].environments.katacoda.com/oauth2/jwks
 ```
 
 The property you've just added is the location of the authorization server's public keys, which the REST API will use to verify incoming bearer tokens.
-
-Now restart the REST API by doing `mvn spring-boot:run`{{execute T2}}.
-At this point, the REST API will no longer honor Basic credentials, and instead will only honor bearer tokens.
 
 Lastly, since the browser is calling the REST API directly, we need to again think about the CORS handshake.
 
@@ -74,6 +71,17 @@ Notice three of important changes:
 * The `Allow-Credentials` flag can be removed
 * We need to allow the `Authorization` header
 
+Now restart the REST API by doing `mvn spring-boot:run`{{execute interrupt T1}}.
+At this point, the REST API will no longer honor Basic credentials, and instead will only honor bearer tokens.
+
+### Starting the Authorization Server
+
+We're now configured to use an authorization server to log in the user.
+
+The authorization server, which is also part of the repository, though in the majority of cases it is a separate third-party application.
+
+You can start it with the command `mvn spring-boot:run -Dstart-class=io.jzheaux.springsecurity.authzserver.AuthzApplication`{{execute interrupt T3}}.
+
 ### Testing It Out
 
 The front-end is already prepared, so now navigate to https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com/bearer.html and try things out!
@@ -85,8 +93,9 @@ This first one simply makes sure that Spring Security was set up correctly.
 
 Run it with the Maven command `mvn -Dtest=io.jzheaux.springsecurity.goals.Module4_Tests#task_1 test`{{execute T4}}.
 
-At the end of the test run, you should the message `BUILD SUCCESS`.
+At the end of the test run, you should see the message `BUILD SUCCESS`.
 
 ### What's Next?
 
-Now, let's change the application to use bearer tokens instead of basic credentials.
+So, things aren't working just, yet.
+We need to make an adjustment with how authorities are being derived from the token.

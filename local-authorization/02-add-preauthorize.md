@@ -2,10 +2,10 @@ In this step, you'll use `@PreAuthorize` to say which users can do what with the
 
 For most of the scenario, you'll be using permission-based authorization, meaning your authorization decisions will be based on whether or not the user has the `goal:read` or `goal:write` permission.
 
-Additionally, we'll be using method-based rules, meaning you'll annotation the controller methods with your authorization rules.
+Additionally, we'll be using method-based rules, meaning you'll annotate the controller methods with your authorization rules.
 Alternatively, you can specify rules in the Spring Security DSL, which we'll introduce a bit later on.
 
-To enable method-based rules, open `src/main/java/io/jzheaux/springsecurity/SecurityConfig.java`{{open}} and annotate the class with `@EnableGlobalMethodSecurity(prePostEnabled = true)`:
+To enable method-based rules, open `src/main/java/io/jzheaux/springsecurity/goals/SecurityConfig.java`{{open}} and annotate the class with `@EnableGlobalMethodSecurity(prePostEnabled = true)`:
 
 ```java
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -64,9 +64,9 @@ Go ahead and add the appropriate permissions for the rest of the methods.
 If it is a `POST` or `PUT`, require the `goal:write` permission.
 
 When you interact with `POST`, `PUT`, or `DELETE` in Spring Security, you will need to provide a CSRF token.
-This application is configured to send one in the response header.
+This application was configured in advance to send one in the response header.
 
-First, do use the helper script `. ./etc/get-csrf`{{execute T2}}.
+First, use the helper script `. ./etc/get-csrf`{{execute T2}}.
 This uses `http` to write session details to the file system and the CSRF token to the environment.
 
 Then, make the `POST` that includes those values to add a goal:
@@ -97,7 +97,7 @@ This first one checks your `@PreAuthorize` annotations.
 
 Run it with the Maven command `mvn -Dtest=io.jzheaux.springsecurity.goals.Module2_Tests#task_1 test`{{execute T2}}.
 
-At the end of the test run, you should the message `BUILD SUCCESS`.
+At the end of the test run, you should see the message `BUILD SUCCESS`.
 
 ### What's Next?
 

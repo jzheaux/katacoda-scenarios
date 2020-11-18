@@ -26,13 +26,13 @@ Started GoalsApplication in 3.288 seconds (JVM running for 3.713)
 
 ### Starting the Front-end
 
-The front-end is a Browser-based application.
+The front-end is a browser-based application.
 For convenience, it's housed in the same codebase as the REST API for this scenario; however, it could be easily deployed separately, as most Javascript applications are.
 
 To start the front-end, run `mvn spring-boot:run -Dstart-class=io.jzheaux.springsecurity.spa.SpaApplication`{{execute interrupt T2}}.
 This will start a front-end application on port 8081.
 
-Once you've started the application, make sure that it's up and running by navigating to https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com/bearer.html
+Once you've started the application, make sure that it's up and running by navigating to https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com/basic.html
 
 You should be able to login, add, and complete goals.
 
