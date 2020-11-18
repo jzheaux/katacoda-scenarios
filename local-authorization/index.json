@@ -7,8 +7,7 @@
     "steps": [
       {
         "title": "Run the REST API",
-        "text": "01-run-app.md",
-        "verify": "01-verify.sh"
+        "text": "01-run-app.md"
       },
       {
         "title": "Using @PreAuthorize",
