@@ -54,7 +54,7 @@ WebMvcConfigurer webMvc() {
         public void addCorsMappings(CorsRegistry registry) {
             registry.addMapping("/**")
                 .allowedOrigins("https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com")
-                .allowHeaders("Content-Type")
+                .allowedHeaders("Content-Type")
                 .maxAge(0);
         }
     };
@@ -91,7 +91,7 @@ WebMvcConfigurer webMvc() {
         public void addCorsMappings(CorsRegistry registry) {
             registry.addMapping("/**")
                 .allowedOrigins("https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com")
-                .allowHeaders("Content-Type")
+                .allowedHeaders("Content-Type")
                 .allowCredentials(true)
                 .maxAge(0);
         }
