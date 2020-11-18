@@ -43,12 +43,7 @@
     "uieditorpath": "/root/code",
     "uisettings": "java",
     "showdashboard": true,
-    "dashboards": [{"name": "Spring Security Reference","href": "https://docs.spring.io/spring-security/site/docs/5.4.0/reference/html5/"}],
-    "terminals": [
-      {"name": "Terminal 2", "target": "host01", "command" : "cd /root/code"},
-      {"name": "Terminal 3", "target": "host01", "command" : "cd /root/code"},
-      {"name": "Terminal 4", "target": "host01", "command" : "cd /root/code"}
-    ]
+    "dashboards": [{"name": "Spring Security Reference","href": "https://docs.spring.io/spring-security/site/docs/5.4.0/reference/html5/"}]
   },
   "backend": {
     "imageid": "openjdk:15"
