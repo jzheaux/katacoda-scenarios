@@ -18,7 +18,7 @@ WebMvcConfigurer webMvc() {
             registry.addMapping("/**")
                 .allowedOrigins("https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com")
                 .allowCredentials(true)
-                .allowedHeaders("X-CSRF-TOKEN")
+                .allowedHeaders("X-CSRF-TOKEN", "Content-Type")
                 .exposedHeaders("X-CSRF-TOKEN")
                 .maxAge(0);
         }

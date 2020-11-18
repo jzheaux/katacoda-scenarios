@@ -34,7 +34,7 @@ This will start a front-end application on port 8081.
 
 It doesn't work yet because we haven't met the security requirements to do that securely.
 
-Once you've started the application, make sure that it's up and running by navigating to https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com/basic.html
+Once you've started the application, make sure that it's up and running by navigating to https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com/basic.html and you should be prompted for credentials.
 
 If you open the JavaScript console, you'll see an error that mentions CORS.
 

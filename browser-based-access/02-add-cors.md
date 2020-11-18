@@ -6,7 +6,7 @@ Configuring your REST API for CORS involves two steps.
 
 The first is to configure Spring Security by overriding the default `SecurityFilterChain` provided by Spring Boot.
 
-In ``src/main/java/io/jzheaux/springsecurity/goals/SecurityConfig.java`{{open}}, publish a `SecurityFilterChain` bean with the following settings:
+In `src/main/java/io/jzheaux/springsecurity/goals/SecurityConfig.java`{{open}}, publish a `SecurityFilterChain` bean with the following settings:
 
 ```java
 import org.springframework.context.annotation.Bean;
@@ -18,7 +18,7 @@ import org.springframework.security.config.Customizer;
 // ...
 
 @Bean
-SecurityFilterChain filterChain(HttpSecurity http) {
+SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
         .cors(Customizer.withDefaults())
         .authorizeRequests((authz) -> authz
@@ -54,9 +54,10 @@ WebMvcConfigurer webMvc() {
         public void addCorsMappings(CorsRegistry registry) {
             registry.addMapping("/**")
                 .allowedOrigins("https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com")
+                .allowHeaders("Content-Type")
                 .maxAge(0);
         }
-    }
+    };
 }
 ```
 
@@ -68,7 +69,7 @@ With the above configuration, AJAX requests are allowed from the front-end's hos
 
 Go ahead and restart the REST API by running `mvn spring-boot:run`{{execute interrupt T1}}.
 
-Then, refresh the page for https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com, again paying attention to the JavaScript console.
+Then, refresh the page for https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com/basic.html, again paying attention to the JavaScript console.
 
 Notice now that there's a new error complaining about the lack of a `Allow-Credentials` configuration.
 
@@ -90,6 +91,7 @@ WebMvcConfigurer webMvc() {
         public void addCorsMappings(CorsRegistry registry) {
             registry.addMapping("/**")
                 .allowedOrigins("https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com")
+                .allowHeaders("Content-Type")
                 .allowCredentials(true)
                 .maxAge(0);
         }
@@ -101,7 +103,7 @@ WebMvcConfigurer webMvc() {
 
 Go ahead and restart the REST API by running `mvn spring-boot:run`{{execute interrupt T1}}.
 
-Then, refresh the page for https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com, again paying attention to the JavaScript console.
+Then, refresh the page for https://[[HOST_SUBDOMAIN]]-8081-[[KATACODA_HOST]].environments.katacoda.com/basic.html, again paying attention to the JavaScript console.
 
 Now, notice that you can provide the credentials in an HTTP Basic popup and see the goals.
 
