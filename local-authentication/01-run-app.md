@@ -21,7 +21,7 @@ Started GoalsApplication in 3.288 seconds (JVM running for 3.713)
 In this module, we'll be using [HTTPie](https://httpie.org) to interface with the API.
 HTTPie is similar to cURL, though with a much nicer UI.
 
-Open a New Terminal and type `http :8080/goals`{{execute T2}}
+Open a New Terminal and type `http :8080/goals`{{execute T3}}
 
 You should see a response similar to:
 
